@@ -9,8 +9,12 @@ Zubehör:
 
 Zum Starten: main.py
 
-gui.py: Die Öberfläche zur Photobox \n
-imageCapture.py: Befehl zum Aufnehmen eines Photos (mit gphoto2 kompitable Kameras) \n
-printer.py: Drucken eines Bildes/der Collage \n
-telegram.py: Melden von wichtigen Informationen (Papier, Patrone leer) \n
-collage.py: Erstellen einer Collage \n
+gui.py: Die Öberfläche zur Photobox
+
+imageCapture.py: Befehl zum Aufnehmen eines Photos (mit gphoto2 kompitable Kameras)
+
+printer.py: Drucken eines Bildes/der Collage
+
+telegram.py: Melden von wichtigen Informationen (Papier, Patrone leer)
+
+collage.py: Erstellen einer Collage
