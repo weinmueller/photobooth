@@ -35,20 +35,20 @@ photo_Einzelbild=tk.PhotoImage(file="buttons/Einzelbild.png")
 photo_Collage=tk.PhotoImage(file="buttons/Collage.png")
 
 # Alle Buttons
-buttons = tk.Button(root,image=photo_Start,width="220",height="82")
-buttons2 = tk.Button(root,image=photo_Einzelbild,width="220",height="81")
-buttons3 = tk.Button(root,image=photo_BildDrucken,width="240",height="80")
-buttons4 = tk.Button(root,image=photo_Nochmal,width="222",height="82")
-buttons5 = tk.Button(root,image=photo_Start,width="220",height="81")
-buttons6 = tk.Button(root,image=photo_Collage,width="220",height="81")
-buttons7 = tk.Button(root,image=photo_JA, width = "221", height="82")
+buttons = [tk.Button(root,image=photo_Start,width="220",height="82"),
+           tk.Button(root,image=photo_Einzelbild,width="220",height="81"),
+           tk.Button(root,image=photo_BildDrucken,width="240",height="80"),
+           tk.Button(root,image=photo_Nochmal,width="222",height="82"),
+           tk.Button(root,image=photo_Start,width="220",height="81"),
+           tk.Button(root,image=photo_Collage,width="220",height="81"),
+           tk.Button(root,image=photo_JA, width = "221", height="82")]
 
 # Alle Labels
 labels = tk.Label(root)
 labels.config(font=("Courier", 44))
 pic = tk.Label(root)
 
-# Bild resize
+# Bild resize (Größe des Previews)
 basewidth = 600
 
 # Location
@@ -61,58 +61,66 @@ printPage = 0
 fileName = None
 path = None
 
+# Hilfsfunktionen:
+def Countdown():
+    labels.config(text = "Achtung!")
+    root.update()
+    time.sleep(1)
+    for sek in ["3","2","1"]:
+        labels.config(text = "Foto wird geschossen in \n" + sek)
+        root.update()
+        time.sleep(1)
+
+def ButtonsDelete():
+    for i in range(len(buttons)):
+        buttons[i].place_forget()
+
+def deletePreview():
+    try:
+        os.remove(folder_name + "/Preview.jpg")
+        print("Löschen von 'Preview.jpg'")
+    except:
+        print("Preview war nicht vorhanden")
+        
+# Dialoge:
 def WelcomePhotoBooth():
-    buttons3.place_forget()
-    buttons4.place_forget()
-    buttons5.place_forget()
+    ButtonsDelete()
     labels.config(text = "Willkommen zur PhotoBooth")
-    buttons.config(command = ChooseSelection)
-    buttons.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+    buttons[0].config(command = ChooseSelection)
+    buttons[0].place(relx=0.5, rely=0.5, anchor=tk.CENTER)
     labels.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
     root.update()
 
 def ChooseSelection():
     pic.place_forget()
-    buttons.place_forget()
-    buttons3.place_forget()
-    buttons4.place_forget()
-    buttons5.place_forget()
+    ButtonsDelete()
     deletePreview()
     
     labels.config(text ="Was wollt ihr drucken?")
-    buttons2.place(relx=0.3, rely=0.5, anchor=tk.CENTER)
-    buttons2.config(command = lambda: AreYouReady(CaptureImage))
-    buttons6.place(relx=0.7, rely=0.5, anchor=tk.CENTER)
-    buttons6.config(command = lambda: AreYouReady(Collage))
+    buttons[1].place(relx=0.3, rely=0.5, anchor=tk.CENTER)
+    buttons[1].config(command = lambda: AreYouReady(CaptureImage))
+    buttons[5].place(relx=0.7, rely=0.5, anchor=tk.CENTER)
+    buttons[5].config(command = lambda: AreYouReady(Collage))
     root.update()
     
 def AreYouReady(com):
     pic.place_forget()
-    buttons.place_forget()
-    buttons2.place_forget()
-    buttons3.place_forget()
-    buttons4.place_forget()
-    buttons5.place_forget()
-    buttons6.place_forget()
+    ButtonsDelete()
     deletePreview()
     if com == CaptureImage:
         labels.config(text ="Seid ihr bereit?")
     if com == Collage:
         labels.config(text ="Jetzt werden vier Bilder \n in kurzer Zeit gemacht! \n \n" +
                       "Seid ihr bereit?")
-    buttons7.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
-    buttons7.config(command = com)
+    buttons[6].place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+    buttons[6].config(command = com)
 
 def Collage():
-    #buttons2.place_forget()
-    buttons7.place_forget()
+    ButtonsDelete()
     
     listofimages = []
     for nbImage in range(4):
-        for sek in ["3","2","1"]:
-            labels.config(text = "Foto wird geschossen in \n" + sek)
-            root.update()
-            time.sleep(1)
+        Countdown()
         labels.config(text = "Lächeln!!") 
         root.update()
         imageCapture.captureImages()
@@ -133,12 +141,8 @@ def Collage():
     PictureReview()
 
 def CaptureImage():
-    #buttons2.place_forget()
-    buttons7.place_forget()
-    for sek in ["3","2","1"]:
-        labels.config(text = "Foto wird geschossen in \n" + sek)
-        root.update()
-        time.sleep(1)
+    ButtonsDelete()
+    Countdown()
     labels.config(text = "Lächeln!!") 
     root.update()
     imageCapture.captureImages()
@@ -171,22 +175,20 @@ def PictureReview():
     pic.image = photo # keep a reference!  
     pic.place(relx = 0.5, rely = 0.4, anchor=tk.CENTER)
     
-    buttons3.config(command = Printing)
-    buttons4.config(command = ChooseSelection)
-    #buttons5.config(command = UploadTelegram(path_Preview))
-    buttons3.place(relx=0.8, rely=0.9, anchor=tk.CENTER)
-    buttons4.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+    buttons[2].config(command = Printing)
+    buttons[3].config(command = ChooseSelection)
+    #buttons5.config(command = lambda: UploadTelegram(path_Preview))
+    buttons[2].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
+    buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
     #buttons5.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
 
-def UploadTelegram(path):
+def UploadTelegram(path): # oder durch Bluetooth ersetzen
     telegram.BotPhoto(path)
     PictureReview()
 
 def Printing():
     pic.place_forget()   
-    buttons3.place_forget()
-    buttons4.place_forget()
-    buttons5.place_forget()
+    ButtonsDelete()
     deletePreview()
     
     labels.config(text = "Bild wird gedruckt...\n ...einen Moment")
@@ -195,22 +197,9 @@ def Printing():
     global printPage
     printPage += 1
     time.sleep(1)
-    if printPage == 2:
+    if printPage == 2: #Todo noch ändern
         telegram.BotMessage("Papier ist bald leer...")
         printPage = -1
         
     time.sleep(30)
     WelcomePhotoBooth()
-
-def deletePreview():
-    try:
-        os.remove(folder_name + "/Preview.jpg")
-        print("Löschen von 'Preview.jpg'")
-    except:
-        print("Preview war nicht vorhanden")
-
-
-
-
-
-
