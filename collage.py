@@ -11,7 +11,7 @@ def create_collage(width, height, listofimages):
     thumbnail_width = width //cols - a # // := Nachkomma stelle abgerundet
     thumbnail_height = height //rows - a
     size = thumbnail_width, thumbnail_height # Bildgroesse
-    new_img = Image.open("background/collage_bg_text.jpg") # Hintergrund der Collage
+    new_im = Image.open("/home/pi/Desktop/photobooth/background/collage_bg_text.jpg") # Hintergrund der Collage
     new_im.thumbnail((width, height))
     #new_im = Image.new('RGB', (width, height),"white")
     ims = []
