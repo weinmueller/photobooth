@@ -7,7 +7,7 @@ Created on Fri Apr 27 18:13:15 2018
 
 # gphoto --auto-detect
 
-import gui
+import gui_collage
 import imageCapture
 import telegram
 
@@ -19,7 +19,7 @@ telegram.BotMessage("Hallo, die Photobooth wurde gestartet!")
 imageCapture.createSaveFolder()
 
 # 2. Gui starten
-gui.WelcomePhotoBooth()
+gui_collage.WelcomePhotoBooth()
 
 # 3. Dauerschleife GUI
-gui.root.mainloop()
+gui_collage.root.mainloop()
