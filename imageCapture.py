@@ -8,7 +8,7 @@ shot_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 triggerCommand = "gphoto2 --capture-image-and-download"
 
 folder_name = shot_date
-save_location = "/home/pi/Desktop/photobooth_pascal/" + folder_name
+save_location = "/home/pi/Desktop/photobooth/" + folder_name
 
 def createSaveFolder():
     try:
