@@ -20,7 +20,7 @@ root = tk.Tk()
 root.geometry("1024x600")
 
 # Hintergrund
-background_image=tk.PhotoImage(file="background/bg.png")
+background_image=tk.PhotoImage(file="background/collage_bg.png")
 background_label = tk.Label(root, image=background_image, width="1024",height="600")
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 background_label.image = background_image
@@ -33,6 +33,7 @@ photo_Nochmal=tk.PhotoImage(file="buttons/Nochmal.png")
 photo_Start=tk.PhotoImage(file="buttons/Start.png")
 photo_Einzelbild=tk.PhotoImage(file="buttons/Einzelbild.png")
 photo_Collage=tk.PhotoImage(file="buttons/Collage.png")
+photo_NextPic=tk.PhotoImage(file="buttons/NaechstesBild.png")
 
 # Alle Buttons
 buttons = [tk.Button(root,image=photo_Start,width="220",height="82"),
@@ -41,7 +42,8 @@ buttons = [tk.Button(root,image=photo_Start,width="220",height="82"),
            tk.Button(root,image=photo_Nochmal,width="222",height="82"),
            tk.Button(root,image=photo_Start,width="220",height="81"),
            tk.Button(root,image=photo_Collage,width="220",height="81"),
-           tk.Button(root,image=photo_JA, width = "221", height="82")]
+           tk.Button(root,image=photo_JA, width = "221", height="82"),
+           tk.Button(root,image=photo_NextPic,width="220",height="81")]
 
 # Alle Labels
 labels = tk.Label(root)
@@ -138,15 +140,15 @@ def PictureReview():
     pic.place(relx = 0.5, rely = 0.4, anchor=tk.CENTER)
     
     if len(listofimages) < 4:        
-        buttons[2].config(command = NextPicture)
+        buttons[7].config(command = NextPicture)
         buttons[3].config(command = DeletePicture)
-        buttons[2].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
+        buttons[7].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
         buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
     if len(listofimages) == 4:
         buttons[2].config(command = Printing)
-        buttons[3].config(command = WelcomePhotoBooth) # Komplett löschen
+        buttons[0].config(command = WelcomePhotoBooth) # Komplett löschen
         buttons[2].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
-        buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+        buttons[0].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 def NextPicture():
     global listofimages, fileName, path
