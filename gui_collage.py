@@ -18,6 +18,7 @@ root = tk.Tk()
 
 # Geometrie des Fensters
 root.geometry("1024x600")
+root.attributes('-fullscreen', True) # Vollbild
 
 # Hintergrund
 background_image=tk.PhotoImage(file="background/collage_bg.png")
@@ -25,6 +26,12 @@ background_label = tk.Label(root, image=background_image, width="1024",height="6
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 background_label.image = background_image
 
+# Exit button
+def close_window (): 
+    root.destroy()
+
+exit_button = tk.Button (root, text = "X", command = close_window)
+exit_button.place(x=0, y=0)
 
 # Alle ButtonImage
 photo_BildDrucken=tk.PhotoImage(file="buttons/BildDrucken.png")
