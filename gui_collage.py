@@ -70,6 +70,10 @@ printPage = 0
 fileName = None
 path = None
 listofimages = []
+## Which mode should be use:
+#   1 -> Hochzeit (Mit Bilduntertitel)
+#   2 -> Party (Ohne Bilduntertiel)
+modus = 2
 
 # Hilfsfunktionen:
 def Countdown():
@@ -188,11 +192,11 @@ def Printing():
     printer.printImage(path)
     global printPage
     printPage += 1
+    time.sleep(5)
+#    if printPage == 2: #Todo noch ändern
+#        #telegram.BotMessage("Papier ist bald leer...")
+#        printPage = -1
+    labels.config(text = "Bild: " + str(printPage))   
     time.sleep(1)
-    if printPage == 2: #Todo noch ändern
-        telegram.BotMessage("Papier ist bald leer...")
-        printPage = -1
-        
-    time.sleep(30)
     WelcomePhotoBooth()        
         
