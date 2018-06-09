@@ -150,12 +150,12 @@ def PictureReview():
     pic.image = photo # keep a reference!  
     pic.place(relx = 0.5, rely = 0.4, anchor=tk.CENTER)
     
-    if len(listofimages) < 4:        
+    if len(listofimages) < 3:        
         buttons[7].config(command = NextPicture)
         buttons[3].config(command = DeletePicture)
         buttons[7].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
         buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
-    if len(listofimages) == 4:
+    if len(listofimages) == 3:
         buttons[2].config(command = Printing)
         buttons[0].config(command = WelcomePhotoBooth) # Komplett löschen
         buttons[2].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
@@ -171,7 +171,7 @@ def NextPicture():
         pic.place_forget()
         labels.config(text = "Collage wird erstellt... \n Einen Moment bitte...")
         root.update()
-        collage.create_collage(6000,4000,listofimages) #ggfs ändern
+        collage.create_collage(6000,4000,listofimages,modus) #ggfs ändern
         fileName = collage.giveFileName()
         path = folder_name + "/" + fileName    
         print(fileName)
@@ -179,7 +179,8 @@ def NextPicture():
 
 def DeletePicture():
     global listofimages
-    del listofimages[-1]
+    if len(listofimages) > 0:
+        del listofimages[-1]
     AreYouReady()    
         
 def Printing():
@@ -197,6 +198,7 @@ def Printing():
 #        #telegram.BotMessage("Papier ist bald leer...")
 #        printPage = -1
     labels.config(text = "Bild: " + str(printPage))   
-    time.sleep(1)
+    root.update()
+    time.sleep(3)
     WelcomePhotoBooth()        
         
