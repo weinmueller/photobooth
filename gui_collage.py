@@ -171,7 +171,7 @@ def NextPicture():
         pic.place_forget()
         labels.config(text = "Collage wird erstellt... \n Einen Moment bitte...")
         root.update()
-        collage.create_collage(6000,4000,listofimages) #ggfs ändern
+        collage.create_collage(6000,4000,listofimages,modus) #ggfs ändern
         fileName = collage.giveFileName()
         path = folder_name + "/" + fileName    
         print(fileName)
@@ -179,7 +179,8 @@ def NextPicture():
 
 def DeletePicture():
     global listofimages
-    del listofimages[-1]
+    if len(listofimages) > 0:
+        del listofimages[-1]
     AreYouReady()    
         
 def Printing():
@@ -197,6 +198,7 @@ def Printing():
 #        #telegram.BotMessage("Papier ist bald leer...")
 #        printPage = -1
     labels.config(text = "Bild: " + str(printPage))   
-    time.sleep(1)
+    root.update()
+    time.sleep(2)
     WelcomePhotoBooth()        
         

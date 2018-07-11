@@ -54,7 +54,7 @@ def create_collage(width, height, listofimages,modus):
             im_with_border = ImageOps.expand(im,border=30,fill='white')
             ims.append(im_with_border)
         i = 0
-        x = a # Startwert
+        x = 30 # Startwert
         y = 0 # Startwert
         for col in range(cols):
             for row in range(rows):
@@ -62,7 +62,7 @@ def create_collage(width, height, listofimages,modus):
                 new_im.paste(ims[i], (x, y))
                 i += 1
                 y += thumbnail_height
-            x += thumbnail_width - a
+            x += thumbnail_width
             y = 0    
         shot_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
         new_im.save(shot_time + "_collage.jpg")  

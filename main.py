@@ -9,11 +9,11 @@ Created on Fri Apr 27 18:13:15 2018
 
 import gui_collage
 import imageCapture
-import telegram
+#import telegram
 
 # main
 # 0. Telegram Bot starten
-telegram.BotMessage("Hallo, die Photobooth wurde gestartet!")
+#telegram.BotMessage("Hallo, die Photobooth wurde gestartet!")
 
 # 1. Ordner erstellen + Pfad herauslesen
 imageCapture.createSaveFolder()
