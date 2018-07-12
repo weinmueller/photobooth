@@ -81,7 +81,7 @@ listofimages = []
 ## Which mode should be use:
 #   1 -> Hochzeit (Mit Bilduntertitel)
 #   2 -> Party (Ohne Bilduntertiel)
-modus = 2
+modus = 1
 
 # Hilfsfunktionen:
 def Countdown():
@@ -163,12 +163,12 @@ def PictureReview():
     
     if len(listofimages) < 3:        
         buttons[7].config(command = NextPicture)
-        buttons[3].config(command = DeletePicture)
+        buttons[3].config(command = AreYouReady)
         buttons[7].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
         buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
     if len(listofimages) == 3:        
         buttons[5].config(command = NextPicture)
-        buttons[3].config(command = DeletePicture)
+        buttons[3].config(command = AreYouReady)
         buttons[5].place(relx=0.8, rely=0.9, anchor=tk.CENTER)
         buttons[3].place(relx=0.2, rely=0.9, anchor=tk.CENTER)
     if len(listofimages) == 4:
