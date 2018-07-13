@@ -21,7 +21,7 @@ root.geometry("1024x600")
 root.attributes('-fullscreen', True) # Vollbild
 
 # Hintergrund
-background_image=tk.PhotoImage(file="background/collage_bg.png")
+background_image=tk.PhotoImage(file="background/Holzwand.png")
 background_label = tk.Label(root, image=background_image, width="1024",height="600")
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 background_label.image = background_image
